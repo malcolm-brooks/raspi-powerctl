@@ -1,7 +1,7 @@
 <?php virtual("/includes/header.php"); ?>
 <body>
 	<div id="content">
-		<div class="block">
+		<div class="well">
 			<p>
 				<?php
 					if ( isset( $_GET['host'], $_GET['gpio'], $_GET['time'] ) ) {
@@ -17,7 +17,7 @@
 					}
 				?>
 			</p>
-			<a class="button" href="/index.php">Home</a>
+			<a class="btn btn-primary" href="/index.php">Home</a>
 		</div>
 	</div>
 <?php virtual("/includes/footer.php"); ?>
