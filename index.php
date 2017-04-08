@@ -10,7 +10,7 @@
 			echo "<h2>$device->name</h2>";
 			echo "<p><b>Current Status:</b> ";
 			# pings device and returns either an error or alive
-			if ( exec("fping -i 150 -t 150 $device->host | awk ' {print$3} ' ") == "alive" )
+			if ( exec("fping -r 1 -t 100 $device->host | awk ' {print$3} ' ") == "alive" )
 			{
 				echo "Online";
 				$a = "disabled";
