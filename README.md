@@ -1,7 +1,7 @@
-# Raspberry Pi GPIO PC Power Switch
+# Raspberry Pi PC Power Control
 
 ## Overview
-This project contains the complete website root contents needed to host the Raspberry PI GPIO PC Power Switch site, allowing you to remotely power-on, sleep and shutdown one or more tower PCs.
+This project contains the complete website root contents needed to host the PC Power Control site, allowing you to remotely power-on, sleep and shutdown one or more desktop computers.
 
 ## Requirements
 * A Raspberry Pi or other GPIO equipped device capable of running a linux apache server.
@@ -11,9 +11,9 @@ This project contains the complete website root contents needed to host the Rasp
 Install various dependancies and enable some extra apache modules.
 ```bash
 $ sudo apt-get update
-$ sudo apt-get install git python apache2-utils
-$ sudo a2enmod mod_include ssl
-$ sudo a2ensite default-ssl.conf
+$ sudo apt-get install apache2 apache2-utils git libapache2-mod-php5 php5 python python-pip
+$ sudo a2enmod php5 ssl
+$ sudo a2dissite 000-default.conf
 ```
 Clone this project into the apache website root directory.
 ```bash
@@ -22,16 +22,25 @@ $ sudo chown -R pi:pi /var/www/html
 $ rm -r /var/www/html/*
 $ git clone https://github.com/malcolm-brooks/pi-pc-power-switch.git /var/www/html/
 ```
-Clone the [power-ctl.py](https://gist.github.com/malcolm-brooks/b33b279c036935638edb1014d5a6189b) into '/usr/scripts'. This python script will allow the site to communicate with the GPIO ports used to control your PC's power state.
+Update the sudoers file to grand limited sudo permissions to the apache user ("www-data").
 ```bash
-$ sudo mkdir -p /usr/scripts
-$ sudo git clone https://gist.github.com/b33b279c036935638edb1014d5a6189b.git /usr/scripts/
+$ sudo visudo
 ```
-Restart the apache service to ensure the changes to modules etc have been picked up.
+Apache will need to run "vcgencmd" and "gpio-ctl.py" as root. Add the following lines:
 ```bash
+# www-data ALL=(root) NOPASSWD: /var/www/html/cgi-bin/gpio-ctl.cgi [0-9] [0-9], /var/www/html/cgi-bin/gpio-ctl.cgi [0-9][0-9] [0-9]
+# www-data ALL=(root) NOPASSWD: /opt/vc/bin/vcgencmd
+``` 
+Install the apache site configuration and then open /etc/apache2/sites-available/001-powerctl.conf" with your favourite text editor to update "raspberrypi" to the FQDN of your Raspberry Pi and "foobarbaz" to your DDNS domain name.
+```bash
+$ sudo cp /var/www/html/apache2_config/001-powerctl.conf /etc/apache2/sites-available/
+```
+Enable the site and restart the apache service to ensure the changes have been picked up.
+```bash
+$ sudo a2ensite 001-powerctl
 $ sudo service apache2 restart
 ```
-You should now be able to access your website via the hostname/ip address of your raspberry pi. Note, at this point you have not made this available to the outside world. If you chose to do this, it is reconmended that you enable ssl enacryption with a self-signed certificate, and use apache to create user logins to stop unintended users being able to remote switch off your devices!
+You should now be able to access your website via the hostname/ip address of your raspberry pi. Note, at this point you have not made this available to the outside world. If you chose to do this, it is reconmended that you enable ssl enacryption with a self-signed certificate (instructions available [Here](https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04)), and use apache to create user logins (instructions available [Here](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)) to stop unintended users being able to remote switch off your devices! The provided apache config can be used with such a setup.
 
 ## Customization
 Devices can be added to the site by creating 'includes/config.json' (relative to your website root directory). It is also possible customise the website's title or footer text from this file. See the example configuration below.
@@ -40,11 +49,17 @@ $ tree /var/www/html
 /var/www/html
 ├── action
 │   └── power-switch.php
+├── apache2_config
+│   └── 001-powerctl.conf
+├── cgi-bin
+│   └── gpio-ctl.cgi
 ├── includes
 │   ├── config.json
 │   ├── footer.php
 │   └── header.php
 ├── index.php
+├── README.md
+├── requirements.txt
 └── static
     ├── favicon.ico
     └── styles.css

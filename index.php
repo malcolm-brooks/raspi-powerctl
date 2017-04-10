@@ -13,18 +13,23 @@
 			if ( exec("fping -r 1 -t 100 $device->host | awk ' {print$3} ' ") == "alive" )
 			{
 				echo "Online";
-				$a = "disabled";
+				echo "</p><div class=\"btn-toolbar\">";
+				if ($device->gpio) {
+					echo "<a class=\"btn btn-primary\" href=\"/action/power-switch.php?gpio=$device->gpio&time=1\" role=\"button\">Sleep</a>";
+					echo "<a class=\"btn btn-danger\" href=\"/action/power-switch.php?gpio=$device->gpio&time=6\" role=\"button\">Shutdown</a>";
+				}
+				echo "</div>";
 			} 
 			else 
 			{
 				echo "Offline";
-				$b = "disabled";
+				echo "</p><div class=\"btn-toolbar\">";
+				if ($device->gpio) {
+					echo "<a class=\"btn btn-primary\" href=\"/action/power-switch.php?gpio=$device->gpio&time=1\" role=\"button\">Power On</a>";
+				}
+				echo "</div>";
 			}
-			echo "</p>";
 			echo "<div class=\"btn-group\">";
-			echo "<a class=\"btn btn-primary $a\" href=\"/action/power-switch.php?host=$device->host&gpio=$device->gpio&time=1\" role=\"button\">Power On</a>";
-			echo "<a class=\"btn btn-primary $b\" href=\"/action/power-switch.php?host=$device->host&gpio=$device->gpio&time=1\" role=\"button\">Sleep</a>";
-			echo "<a class=\"btn btn-danger $b\" href=\"/action/power-switch.php?host=$device->host&gpio=$device->gpio&time=6\" role=\"button\">Shutdown</a>";
 			echo "</div>";
 			echo "</div></div>";
 		}
@@ -33,19 +38,19 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Raspberry Pi</div>
 			<div class="panel-body">
-			<?php 
+			<?php
 				$temp = exec("sudo /opt/vc/bin/vcgencmd measure_temp");
 				$tempjunk = array("temp=");
 				$tempclean = str_replace($tempjunk, "", $temp);
 				echo "<div class=\"col-sm-4\"><b>System Temperature:</b> $tempclean</div>";
 			?>
-			<?php 
+			<?php
 				$cpu = exec("cat /proc/loadavg | awk '{print $1, $2, $3}'");
 				$cpujunk = array("load average:");
 				$cpuclean = str_replace($cpujunk, "", $cpu);
 				echo "<div class=\"col-sm-4\"><b>Load Averages:</b> $cpuclean</div>";
 			?>
-			<?php 
+			<?php
 				$ram = exec("free -h | grep Mem |  awk ' {print$3,\" of \",$2} ' ");
 				$ramclean = str_replace("M", "MB", $ram);
 				echo "<div class=\"col-sm-4\"><b>Memory Usage:</b> $ramclean</div>";

@@ -4,19 +4,34 @@
 		<div class="well">
 			<p>
 				<?php
-					if ( isset( $_GET['host'], $_GET['gpio'], $_GET['time'] ) ) {
-						$host = (string)$_GET['host'];
-						$gpio = (int)$_GET['gpio'];
-						$time = (int)$_GET['time'];
+					# check for empty variables in GET request
+					foreach($_GET as $name => $value) {
+						if($value == "") {
+							$exit = True;
+						}
+					}
+					if ($exit) {
+						echo "Error: Invalid JSON";
+					} else {
+						# extract variables from GET request
+						extract($_GET);
 						# runs python script
-						exec("sudo /usr/bin/python /usr/scripts/power-ctl.py $gpio $time");
+						exec("sudo /var/www/html/cgi-bin/gpio-ctl.cgi $gpio $time", $output);
 						# displays action
 						echo "Holding the power switch for $time second(s)";
-					} else {
-						echo "Error: Invalid JSON";
 					}
 				?>
 			</p>
+			<?php
+				# print error if applicable
+				if ($output) {
+					echo "<code>";
+					foreach ($output as $i => $l) {
+						if ($i > 0) { echo "</br>$l"; } else { echo "$l"; }
+					}
+					echo "</code>";
+				}
+			?>
 			<a class="btn btn-primary" href="/index.php">Home</a>
 		</div>
 	</div>

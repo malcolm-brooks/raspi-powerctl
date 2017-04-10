@@ -7,6 +7,12 @@ footer {
 	text-align: center;
 }
 
+code {
+	display: block;
+	padding: 1em !important;
+	white-space: pre;
+}
+
 .well h2 {
 	margin-top: 0;
 }
