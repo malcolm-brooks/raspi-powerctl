@@ -75,6 +75,7 @@ $ cat includes/config.json
   [
     {
       "name": "Anonymous Coward's Desktop",
+      "owner": "anonymouscoward",
       "host": "anonymous-desktop.local",
       "gpio": 7
     }

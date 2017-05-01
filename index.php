@@ -13,12 +13,17 @@
 			if ( exec("fping -r 1 -t 100 $device->host | awk ' {print$3} ' ") == "alive" )
 			{
 				echo "Online";
-				echo "</p><div class=\"btn-toolbar\">";
-				if ($device->gpio) {
-					echo "<a class=\"btn btn-primary\" href=\"/action/power-switch.php?gpio=$device->gpio&time=1\" role=\"button\">Sleep</a>";
-					echo "<a class=\"btn btn-danger\" href=\"/action/power-switch.php?gpio=$device->gpio&time=6\" role=\"button\">Shutdown</a>";
+				echo "</p>";
+				if (! isset($device->owner) || "{$_SERVER['PHP_AUTH_USER']}" == $device->owner) {
+					echo "<div class=\"btn-toolbar\">";
+					if ($device->gpio) {
+						echo "<a class=\"btn btn-primary\" href=\"/action/power-switch.php?gpio=$device->gpio&time=1\" role=\"button\">Sleep</a>";
+						echo "<a class=\"btn btn-danger\" href=\"/action/power-switch.php?gpio=$device->gpio&time=6\" role=\"button\">Shutdown</a>";
+					}
+					echo "</div>";
+				} else {
+					echo"<p>Only the device owner ($device->owner) can perform actions on an online device.</p>";
 				}
-				echo "</div>";
 			} 
 			else 
 			{
