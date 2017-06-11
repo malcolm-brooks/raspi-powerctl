@@ -34,6 +34,7 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<li><a class="navbar_nav" href="/private/devices">Devices</a></li>
+						<li><a class="navbar_nav" href="/private/services">Services</a></li>
 					</ul>
 					<ul class="nav navbar-nav pull-right">
 						<li><a class="navbar_nav"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo "{$_SERVER['PHP_AUTH_USER']}"; ?></a></li>

@@ -53,13 +53,16 @@ $ tree /var/www/html
 │   ├── config.json
 │   ├── footer.php
 │   └── header.php
+├── index.php
 ├── login.php
 ├── private
 │   ├── action
-│   │   └── power-switch.php
+│   │   ├── power-switch.php
+│   │   └── service.php
 │   ├── cgi-bin
 │   │   └── gpio-ctl.cgi
-│   └── devices.php
+│   ├── devices.php
+│   └── services.php
 ├── README.md
 ├── requirements.txt
 └── static
@@ -80,6 +83,16 @@ $ cat includes/config.json
       "owner": "anonymouscoward",
       "host": "anonymous-desktop.local",
       "gpio": 7
+    }
+  ],
+  "services":
+  [
+    {
+      "name": "My Service"
+      "user": "serviceuser",
+      "host": "anonymous-desktop.local",
+      "command": "service_name",
+      "options": [ "start", "stop", "status" ]
     }
   ]
 }
