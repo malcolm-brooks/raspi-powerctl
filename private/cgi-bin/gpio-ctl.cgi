@@ -11,6 +11,7 @@ import sys
 import traceback
 
 try:
+
 	import RPi.GPIO as GPIO
 
 	p=int(sys.argv[1])
@@ -22,5 +23,8 @@ try:
 	sleep(t)
 	GPIO.output(p, False)
 	GPIO.cleanup()
+
+	del p, t
+
 except:
         traceback.print_exc(file=sys.stdout)

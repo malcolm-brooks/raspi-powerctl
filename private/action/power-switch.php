@@ -1,7 +1,7 @@
-<?php virtual("/includes/header.php"); ?>
+<?php virtual("/includes/header"); ?>
 <body>
 	<div id="content">
-		<div class="well">
+		<div class="jumbotron cell">
 			<p>
 				<?php
 					# check for empty variables in GET request
@@ -16,7 +16,7 @@
 						# extract variables from GET request
 						extract($_GET);
 						# runs python script
-						exec("sudo /var/www/html/cgi-bin/gpio-ctl.cgi $gpio $time", $output);
+						exec("sudo /var/www/html/private/cgi-bin/gpio-ctl.cgi $gpio $time", $output);
 						# displays action
 						echo "Holding the power switch for $time second(s)";
 					}
@@ -32,7 +32,7 @@
 					echo "</code>";
 				}
 			?>
-			<a class="btn btn-primary" href="/index.php">Home</a>
+			<a class="btn btn-primary" href="javascript:history.go(-1)">Back</a>
 		</div>
 	</div>
-<?php virtual("/includes/footer.php"); ?>
+<?php virtual("/includes/footer"); ?>

@@ -47,17 +47,19 @@ Devices can be added to the site by creating 'includes/config.json' (relative to
 ```bash
 $ tree /var/www/html
 /var/www/html
-├── action
-│   └── power-switch.php
 ├── apache2_config
 │   └── 001-powerctl.conf
-├── cgi-bin
-│   └── gpio-ctl.cgi
 ├── includes
 │   ├── config.json
 │   ├── footer.php
 │   └── header.php
-├── index.php
+├── login.php
+├── private
+│   ├── action
+│   │   └── power-switch.php
+│   ├── cgi-bin
+│   │   └── gpio-ctl.cgi
+│   └── devices.php
 ├── README.md
 ├── requirements.txt
 └── static
