@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<?php
 			$config = json_decode(file_get_contents("config.json", true));
@@ -21,7 +22,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">
+					<a class="navbar-brand" href="/">
 						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 					</a>
 					<?php
