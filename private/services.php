@@ -2,8 +2,8 @@
 <div id="content">
 	<div class="row">
 	<?php
-		$config = json_decode(file_get_contents("{$_SERVER['DOCUMENT_ROOT']}/includes/config.json"));
-		foreach($config->services as $service)
+		$private = json_decode(file_get_contents("{$_SERVER['DOCUMENT_ROOT']}/private/private.config"));
+		foreach($private->services as $service)
 		{
 			echo "<div class=\"col-md-6\">";
 			echo "<div class=\"jumbotron cell\">";

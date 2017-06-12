@@ -2,8 +2,8 @@
 <html lang="en">
 	<head>
 		<?php
-			$config = json_decode(file_get_contents("config.json", true));
-			$title = $config->site->title;
+			$_config = file_get_contents("{$_SERVER['DOCUMENT_ROOT']}/site.config", true);
+			extract(json_decode($_config, true));
 			echo "<title>$title</title>";
 		?>
 		<link rel="icon" type="image/png" href="/static/favicon.ico">
@@ -25,11 +25,7 @@
 					<a class="navbar-brand" href="/">
 						<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 					</a>
-					<?php
-						$config = json_decode(file_get_contents("config.json", true));
-						$title = $config->site->title;
-						echo "<a class=\"navbar-brand\" href=\"/\">$title</a>"
-					?>
+					<a class="navbar-brand" href="/"><?php echo $title ?></a>
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
