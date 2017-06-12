@@ -1,6 +1,6 @@
 <?php virtual("/includes/header"); ?>
 <div id="content">
-	<form class="form-signin" method="POST" action="/dologin.html">
+	<form class="form-signin" method="POST" action="/dologin.html?<?php echo $_GET["next"] ?>">
 	<div class="well">
 		<label for="httpd_username" class="sr-only">Username</label>
 		<input type="text" name="httpd_username" class="form-control" placeholder="Username" value="" />
