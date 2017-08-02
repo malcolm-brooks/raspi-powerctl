@@ -40,7 +40,7 @@ Enable the site and restart the apache service to ensure the changes have been p
 $ sudo a2ensite 001-powerctl
 $ sudo service apache2 restart
 ```
-You should now be able to access your website via the hostname/ip address of your raspberry pi. Note, at this point you have not made this available to the outside world. If you chose to do this, it is reconmended that you enable ssl enacryption with a self-signed certificate (instructions available [Here](https://www.digitalocean.com/community/tutorials/how-to-create-a-ssl-certificate-on-apache-for-ubuntu-14-04)), and use apache to create user logins (instructions available [Here](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)) to stop unintended users being able to remote switch off your devices! The provided apache config can be used with such a setup.
+You should now be able to access your website via the hostname/ip address of your raspberry pi. Note, at this point you have not made this available to the outside world. If you chose to do this, it is reconmended that you enable ssl encryption with a free certificate "Let's Encrypt" (instructions available [Here](https://github.com/Neilpang/acme.sh)), and use apache to create user logins (instructions available [Here](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)) to stop unintended users being able to remote switch off your devices! The provided apache config can be used with such a setup.
 
 ## Customization
 Devices and services can be added to the site by creating 'private/private.config' (relative to your website root directory).
