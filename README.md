@@ -54,7 +54,6 @@ $ tree /var/www/html
 ├── includes
 │   ├── footer.php
 │   └── header.php
-├── index.php
 ├── login.php
 ├── private
 │   ├── action
