@@ -33,7 +33,7 @@
 						<li><a class="navbar_nav" href="/private/services">Services</a></li>
 					</ul>
 					<ul class="nav navbar-nav pull-right">
-						<li><a class="navbar_nav"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo "{$_SERVER['PHP_AUTH_USER']}"; ?></a></li>
+						<li><a href="/private/user/change-password" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo "{$_SERVER['PHP_AUTH_USER']}"; ?></a></li>
 					</ul>
 				</div>
 			</div>
