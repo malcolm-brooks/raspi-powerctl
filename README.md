@@ -88,8 +88,21 @@ $ cat private/private.config
       "name": "My Service"
       "user": "serviceuser",
       "host": "anonymous-desktop.local",
-      "command": "service_name",
-      "options": [ "start", "stop", "status" ]
+      "commands":
+      [
+				{
+					"name": "start",
+					"command": "service_name start"
+				},
+				{
+					"name": "stop",
+					"command": "service_name stop"
+				},
+				{
+					"name": "status",
+					"command": "service_name status"
+				}
+      ]
     }
   ]
 }

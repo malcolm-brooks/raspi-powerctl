@@ -9,9 +9,9 @@
 			echo "<div class=\"jumbotron cell\">";
 			echo "<h2>$service->name</h2>";
 			echo "<div class=\"btn-toolbar\">";
-			foreach($service->options as $option)
+			foreach($service->commands as $cmd)
 			{
-				echo "<a class=\"btn btn-primary\" href=\"/private/action/service?user=$service->user&host=$service->host&command=$service->command&option=$option\" role=\"button\">", ucwords($option) ,"</a>";
+				echo "<a class=\"btn btn-primary\" href=\"/private/action/service?user=$service->user&host=$service->host&command=$cmd->command\" role=\"button\">", ucwords($cmd->name) ,"</a>";
 			}
 			echo "</div></div></div>";
 		}

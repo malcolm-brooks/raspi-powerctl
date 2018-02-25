@@ -15,7 +15,7 @@
 					# extract variables from GET request
 					extract($_GET);
 					# sends command to server
-					exec("sudo /usr/bin/ssh $user@$host $command $option 2>&1", $output);
+					exec("sudo /usr/bin/ssh $user@$host $command 2>&1", $output);
 				}
 			?>
 			<?php
