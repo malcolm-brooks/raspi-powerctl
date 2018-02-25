@@ -53,7 +53,8 @@ $ tree /var/www/html
 │   └── 001-powerctl.conf
 ├── includes
 │   ├── footer.php
-│   └── header.php
+│   ├── header.php
+│   └── host-stats.php
 ├── login.php
 ├── private
 │   ├── action
