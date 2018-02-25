@@ -1,7 +1,7 @@
 # Raspberry Pi PC Power Control
 
 ## Overview
-This project contains the complete website root contents needed to host the PC Power Control site, allowing you to remotely power-on, sleep and shutdown one or more desktop computers.
+This project contains the complete website root contents needed to host the PC Power Control site, allowing you to remotely power-on, sleep and shutdown one or more desktop computers. It can also be used as a Wake On LAN server.
 
 ## Requirements
 * A Raspberry Pi or other GPIO equipped device capable of running a linux apache server.
@@ -31,8 +31,9 @@ Apache will need to run "vcgencmd" and "gpio-ctl.py" as root. Add the following 
 # www-data ALL=(root) NOPASSWD: /var/www/html/cgi-bin/gpio-ctl.cgi [0-9] [0-9], /var/www/html/cgi-bin/gpio-ctl.cgi [0-9][0-9] [0-9]
 # www-data ALL=(root) NOPASSWD: /opt/vc/bin/vcgencmd
 ``` 
-Install the apache site configuration and then open /etc/apache2/sites-available/001-powerctl.conf" with your favourite text editor to update "raspberrypi" to the FQDN of your Raspberry Pi and "foobarbaz" to your DDNS domain name.
+Install python requirements and apache site configuration. Then open /etc/apache2/sites-available/001-powerctl.conf" with your favourite text editor to update "raspberrypi" to the FQDN of your Raspberry Pi and "foobarbaz" to your DDNS domain name.
 ```bash
+$ sudo pip install -r requirements.txt
 $ sudo cp /var/www/html/apache2_config/001-powerctl.conf /etc/apache2/sites-available/
 ```
 Enable the site and restart the apache service to ensure the changes have been picked up.
@@ -59,7 +60,8 @@ $ tree /var/www/html
 ├── private
 │   ├── action
 │   │   ├── power-switch.php
-│   │   └── service.php
+│   │   ├── service.php
+│   │   └── wake-on-lan.php
 │   ├── cgi-bin
 │   │   └── gpio-ctl.cgi
 │   ├── devices.php
@@ -80,6 +82,7 @@ $ cat private/private.config
       "name": "Anonymous Coward's Desktop",
       "owner": "anonymouscoward",
       "host": "anonymous-desktop.local",
+      "mac_address": "ab:cd:ef:12:34:56",
       "gpio": 7
     }
   ],

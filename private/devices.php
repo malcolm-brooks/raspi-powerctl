@@ -32,6 +32,9 @@
 				if ($device->gpio) {
 					echo "<a class=\"btn btn-primary\" href=\"/private/action/power-switch?gpio=$device->gpio&time=1\" role=\"button\">Power On</a>";
 				}
+				if ($device->mac_address) {
+					echo "<a class=\"btn btn-primary\" href=\"/private/action/wake-on-lan.php?mac=$device->mac_address\" role=\"button\">Wake</a>";
+				}
 				echo "</div>";
 			}
 			echo "</div></div>";
