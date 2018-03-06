@@ -31,7 +31,7 @@
 				echo "</code>";
 			}
 		?>
-		<a class="btn btn-primary" href="javascript:history.go(-1)">Back</a>
+		<a class="btn btn-primary" href="javascript:window.location = document.referrer">Back</a>
 	</div>
 </div>
 <?php virtual("/includes/footer.php"); ?>
