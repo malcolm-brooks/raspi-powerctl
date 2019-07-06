@@ -94,18 +94,18 @@ $ cat private/private.config
       "host": "anonymous-desktop.local",
       "commands":
       [
-				{
-					"name": "start",
-					"command": "service_name start"
-				},
-				{
-					"name": "stop",
-					"command": "service_name stop"
-				},
-				{
-					"name": "status",
-					"command": "service_name status"
-				}
+        {
+          "name": "start",
+          "command": "service_name start"
+        },
+        {
+          "name": "stop",
+          "command": "service_name stop"
+        },
+        {
+          "name": "status",
+          "command": "service_name status"
+        }
       ]
     }
   ]
